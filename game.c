@@ -2991,9 +2991,6 @@ void handle_key_down(SDLKey key) {
 	  freecam = 1;
 	} else if (key == SDLK_r) {
 	  init_fade(6);
-	} else if (key == SDLK_x) {
-	  beret.x = mx;
-	  beret.y = my;
         } else if (key == SDLK_t && !beret.dead && beatlevel[LAST_LEVEL]) {
 	  istophat = !istophat;
 	  beret.subtype = istophat;
@@ -3818,6 +3815,7 @@ void draw_credits() {
   display_message(300 - credit_square(150,200), 350 - credit_cube(150,4000), font, "Game by:", 0);
   display_message(SCR_WIDTH - 300 + credit_square(170,200), 400 + credit_cube(170,4000), font, "Nigel Kilmer", 0);
   display_message(SCR_WIDTH - 250 + credit_square(170,200), 450 + credit_cube(170,4000), smfont, "(Kiwisauce)", 0);
+  /*
   // Design
   display_message(320 - credit_square(350,200), 350 - credit_cube(350,4000), font, "Design:", 0);
   display_message(SCR_WIDTH - 320 + credit_square(370,200), 400 + credit_cube(370,4000), font, "Nigel Kilmer", 0);
@@ -3836,23 +3834,24 @@ void draw_credits() {
   // Sound
   display_message(330 - credit_square(1350,200), 440 - credit_cube(1350,4000), font, "Sound:", 0);
   display_message(SCR_WIDTH - 350 + credit_square(1370,200), 490 + credit_cube(1370,4000), font, "Nigel Kilmer", 0);
+  */
   // Playtesters
-  display_message(250 - credit_square(1550,200), 350 - credit_cube(1550,4000), font, "Thanks to all playtesters!", 0);
-  display_message(SCR_WIDTH - 250 - credit_square(1700,200), 490 + credit_cube(1700,4000), font, "Stefan Roger", 0);
-  display_message(SCR_WIDTH - 550 + credit_square(1775,200), 400 + credit_cube(1775,4000), font, "Bret Sepulveda", 0);
-  display_message(SCR_WIDTH - 450 + credit_square(1850,200), 320 + credit_cube(1850,4000), font, "Kyle Kilmer", 0);
-  display_message(SCR_WIDTH - 320 + credit_square(1925,200), 280 + credit_cube(1925,4000), font, "Nathan Weizenbaum", 0);
-  display_message(SCR_WIDTH - 350 + credit_square(2000,200), 420 + credit_cube(2000,4000), font, "KC Gidewall", 0);
-  display_message(SCR_WIDTH - 470 + credit_square(2075,200), 300 + credit_cube(2075,4000), font, "Alyssa Gidewall", 0);
-  display_message(SCR_WIDTH - 450 + credit_square(2150,200), 410 + credit_cube(2150,4000), font, "Ivan Kozlov", 0);
-  display_message(SCR_WIDTH - 350 + credit_square(2225,200), 500 + credit_cube(2225,4000), font, "Daniel Mills", 0);
-  display_message(SCR_WIDTH - 250 + credit_square(2300,200), 430 + credit_cube(2300,4000), font, "Raymond Zhang", 0);
-  display_message(SCR_WIDTH - 550 + credit_square(2375,200), 290 + credit_cube(2375,4000), font, "Jonathan Kane", 0);
-  display_message(SCR_WIDTH - 300 + credit_square(2450,200), 400 + credit_cube(2450,4000), font, "Tristan Pearson", 0);
-  display_message(SCR_WIDTH - 460 + credit_square(2525,200), 250 + credit_cube(2525,4000), font, "Beau Pearson", 0);
+  display_message(250 - credit_square(350,200), 350 - credit_cube(350,4000), font, "Thanks to all playtesters!", 0);
+  display_message(SCR_WIDTH - 250 - credit_square(500,200), 490 + credit_cube(500,4000), font, "Stefan Roger", 0);
+  display_message(SCR_WIDTH - 550 + credit_square(575,200), 400 + credit_cube(575,4000), font, "Bret Sepulveda", 0);
+  display_message(SCR_WIDTH - 450 + credit_square(650,200), 320 + credit_cube(650,4000), font, "Kyle Kilmer", 0);
+  display_message(SCR_WIDTH - 320 + credit_square(725,200), 280 + credit_cube(725,4000), font, "Nathan Weizenbaum", 0);
+  display_message(SCR_WIDTH - 350 + credit_square(800,200), 420 + credit_cube(800,4000), font, "KC Gidewall", 0);
+  display_message(SCR_WIDTH - 470 + credit_square(875,200), 300 + credit_cube(875,4000), font, "Alyssa Gidewall", 0);
+  display_message(SCR_WIDTH - 450 + credit_square(950,200), 410 + credit_cube(950,4000), font, "Ivan Kozlov", 0);
+  display_message(SCR_WIDTH - 350 + credit_square(1025,200), 500 + credit_cube(1025,4000), font, "Daniel Mills", 0);
+  display_message(SCR_WIDTH - 250 + credit_square(1100,200), 430 + credit_cube(1100,4000), font, "Raymond Zhang", 0);
+  display_message(SCR_WIDTH - 550 + credit_square(1175,200), 290 + credit_cube(1175,4000), font, "Jonathan Kane", 0);
+  display_message(SCR_WIDTH - 300 + credit_square(1250,200), 400 + credit_cube(1250,4000), font, "Tristan Pearson", 0);
+  display_message(SCR_WIDTH - 460 + credit_square(1325,200), 250 + credit_cube(1325,4000), font, "Beau Pearson", 0);
   // Copyright
-  if (credittime < 2800) {
-    display_message(300, 420 + credit_square(2800,200), font, "Copyright 2011 Nigel Kilmer", 0);
+  if (credittime < 1500) {
+    display_message(300, 420 + credit_square(1500,200), font, "Copyright 2011 Nigel Kilmer", 0);
   } else {
     display_message(300, 420, font, "Copyright 2011 Nigel Kilmer", 0);
     display_message(400, 470, smfont, "Thanks for playing!", 0);
@@ -4109,7 +4108,7 @@ int main(int argc, char* argv[]) {
       if (ingame == 13) {
 	credittime++;
 	draw_credits();
-	if (credittime >= 3200) init_fade(4);
+	if (credittime >= 1950) init_fade(4);
         if (!inactive) draw_cursor();
         update_fade();
         if (SDL_Flip(screen) == -1) return 1;
