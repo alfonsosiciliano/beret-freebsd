@@ -640,7 +640,7 @@ const char* msgs[MSGMAX][8] =
 const int medalsprx[6] = {5,5,5,5,5,3};
 const int medalspry[6] = {15,18,19,16,17,11};
 
-const char *copyright = "Beret v1.2.0 Copyright 2011 Nigel Kilmer";
+const char *copyright = "Beret v1.2.1 Copyright 2011 Nigel Kilmer";
 
 int i, j;
 int quit=0;
@@ -3783,7 +3783,7 @@ void draw_select_game() {
 
 void draw_title_screen() {
   apply_surface(0,0,title,screen);
-  sprintf(messagestr, "Beret 1.2.0");
+  sprintf(messagestr, "Beret 1.2.1");
   display_message(45, 15, smfont, 0, 1);
 }
 
