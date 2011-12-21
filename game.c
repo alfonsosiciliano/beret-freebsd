@@ -88,9 +88,12 @@
 #define DIRSEP "/"
 #endif
 
-#ifdef __APPLE__
+#if defined __APPLE__
 #define SUPPORT_PATH "Library/Application Support/Beret/"
 #define RESOURCE_PATH "Beret.app/Contents/Resources/"
+#elif defined __WIN32__
+#define SUPPORT_PATH ".beret/"
+#define RESOURCE_PATH ""
 #else
 #define RESOURCE_PATH ""
 #endif
@@ -812,7 +815,9 @@ void apply_sprite(int x, int y, int sprx, int spry, int sprw, int sprh,
 
 int init() {
 
-  #ifdef __APPLE__
+  #ifdef __WIN32
+  sprintf(support_path, "");
+  #else
   char filestr[512];
   // Get the home directory of the user.
   struct passwd *pwd = getpwuid(getuid());
@@ -827,8 +832,6 @@ int init() {
     sprintf(filestr, "%s/saves", support_path);
     mkdir(filestr, S_IRWXU);
   }
-  #else
-  sprintf(support_path, "");
   #endif
 
   if (SDL_Init(SDL_INIT_EVERYTHING) == -1) {
@@ -2988,6 +2991,9 @@ void handle_key_down(SDLKey key) {
 	  freecam = 1;
 	} else if (key == SDLK_r) {
 	  init_fade(6);
+	} else if (key == SDLK_x) {
+	  beret.x = mx;
+	  beret.y = my;
         } else if (key == SDLK_t && !beret.dead && beatlevel[LAST_LEVEL]) {
 	  istophat = !istophat;
 	  beret.subtype = istophat;
@@ -3158,8 +3164,8 @@ void handle_mouse_down(int x, int y, int button) {
       if (xtile > -1 && xtile < 24 && ytile > -1 && ytile < 18) {
         if (ytile < 10) {
           tindex = xtile+ytile*24+2;
-          if (tindex < TOPHAT && tindex != READSIGN && tindex != STONEY &&
-	      tindex != BLOCKSTER && tindex != MATTERLY) {
+          if ((tindex < TOPHAT && tindex != READSIGN && tindex != STONEY &&
+	      tindex != BLOCKSTER && tindex != MATTERLY) || tindex == MATTERFRAG) {
             crtplacetype = tindex;
             crtplacesubtype = 0;
           }
@@ -3543,9 +3549,10 @@ void draw_inventory() {
   displthing.anim = 0;
   displthing.telething = 0;
 
-  for (i=2; i < TYPEMAX; i++) {
-    if (i == READSIGN || i == STONEY || i == BLOCKSTER || i == MATTERLY || 
-	i == TOPHAT || i == SHIELDGEN) continue;
+  for (i=2; i <= TOPHATSHIELD; i++) {
+    if (i == READSIGN || i == STONEY || i == BLOCKSTER || 
+	i == TOPHAT || i == SHIELDGEN ||
+	(i >= TYPEMAX && i <= SPIKEBLOCK) || i == TOPHATSHIELD) continue;
     displthing.type = i;
     displthing.x = ((i-2)%24)*SPR_SIZE+SPR_SIZE;
     displthing.y = ((i-2)/24)*SPR_SIZE+SPR_SIZE;

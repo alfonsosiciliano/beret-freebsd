@@ -533,7 +533,7 @@ int subtype_count(int type) {
   case HOPPER: case SOLIDSWITCH:
   case GRAVITYSWITCH:
     return 2;
-  case BOMB: case FAKEBOMB : case FAKEBLOCK: case DOOR:
+  case BOMB: case FAKEBOMB : case FAKEBLOCK: case DOOR: case MATTERFRAG:
     return 3;
   case WOODBLOCK: case ICEBLOCK: case STONEBLOCK: case GRAVITYBLOCK:
   case LINKBLOCK: case MEDALCORNER: case BIGBLOCK: case VSIGN:
@@ -839,8 +839,8 @@ void draw_thing(Thing* this, int args[6]) {
   case MATTERFRAG :
     args[0] = this->x-1;
     args[1] = this->y-1;
-    if (this->subtype < 2) {
-      args[2] = 10+this->subtype;
+    if ((this->subtype % 3) < 2) {
+      args[2] = 10+(this->subtype%3);
       args[3] = 15;
     } else {
       args[2] = 10;
@@ -1738,7 +1738,7 @@ void special_thing(Thing* this, Thing things[250],
     if (this->timer == 300) destroy_thing(this, BOMBED, things, index);
     break;
   case MATTERFRAG :
-    if (bossvars[2] == 0 && bossvars[BOSSMAX-1] == 0) {
+    if (this->subtype >= 3 && bossvars[2] == 0 && bossvars[BOSSMAX-1] == 0) {
       angle = (index*6+things[bossvars[1]].timer % 90) * PI/45;
       temp3 = 60 + 10*cos(things[bossvars[1]].timer % 360 * PI/180);
       this->vx = 
@@ -1891,7 +1891,7 @@ void special_thing(Thing* this, Thing things[250],
       if ((temp = find_empty(things)) > -1) {
 	angle = (temp*6 + this->timer % 90) * PI/45;
 	temp3 = 60;
-	make_thing(temp, MATTERFRAG, bossvars[0] % 3,
+	make_thing(temp, MATTERFRAG, bossvars[0] % 3 + 3,
 		   this->x+9+cos(angle)*temp3,
 		   this->y+9+sin(angle)*temp3, 0, things);
 	make_expl(this->x+9+cos(angle)*temp3,this->y+9+sin(angle)*temp3,
