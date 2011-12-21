@@ -3855,6 +3855,7 @@ void draw_credits() {
   } else {
     display_message(300, 420, font, "Copyright 2011 Nigel Kilmer", 0);
     display_message(400, 470, smfont, "Thanks for playing!", 0);
+    display_message(400, 500, smfont, "kiwisauce.com", 0);
   }
 }
 
