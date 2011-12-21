@@ -815,7 +815,7 @@ void apply_sprite(int x, int y, int sprx, int spry, int sprw, int sprh,
 
 int init() {
 
-  #ifdef __WIN32
+  #ifdef __WIN32__
   sprintf(support_path, "");
   #else
   char filestr[512];
