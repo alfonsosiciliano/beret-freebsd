@@ -10,7 +10,7 @@
 #include <stdlib.h>
 #include <stdio.h>
 #include <string.h>
-#ifdef __APPLE__
+#ifndef __WIN32__
 #include <sys/stat.h>
 #include <unistd.h>
 #include <errno.h>
@@ -92,9 +92,9 @@
 #define SUPPORT_PATH "Library/Application Support/Beret/"
 #define RESOURCE_PATH "Beret.app/Contents/Resources/"
 #elif defined __WIN32__
-#define SUPPORT_PATH ".beret/"
 #define RESOURCE_PATH ""
 #else
+#define SUPPORT_PATH ".beret/"
 #define RESOURCE_PATH ""
 #endif
 
