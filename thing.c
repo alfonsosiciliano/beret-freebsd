@@ -2311,7 +2311,7 @@ void check_crash(Thing* this, Thing* other, int oindex, float vel,
       }
       break;
     case GRAVITYSWITCH :
-      if (vel > 2.3 && this->timer == 0 && (!other || other->type != GHOST)) {
+      if (vel > 2.3 && this->timer == 0 && (!other || (other->type != GHOST && other->type != ANTIMATTER))) {
         this->anim += (this->subtype ? 1 : -1);
         if (this->anim < UP) this->anim = LEFT;
         if (this->anim > LEFT) this->anim = UP;
