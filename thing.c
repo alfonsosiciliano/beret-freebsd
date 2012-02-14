@@ -927,7 +927,8 @@ void destroy_thing(Thing* this, int method,
     // Sound effects for deaths.
     if (on_screen(this->x, this->y, this->width, this->height) &&
 	!(this->type == BOMB || this->type == STICKYBOMB || this->type == FAKEBOMB || this->type == FIREBALL)) {
-      if (this->type == GHOST || method == TOUCH || method == BOMBED || (method >= CRASHU && method <= CRASHL))
+      if ((this->type == GHOST && method != PIT && method != INFECT) ||
+	  method == TOUCH || method == BOMBED || (method >= CRASHU && method <= CRASHL))
 	play_sound(SND_POP+rand_to(3));
       else if (method == INSIDE) {
 	if (this->type == BERET) play_sound(SND_SQUELCH+rand_to(3));
