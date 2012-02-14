@@ -1955,7 +1955,7 @@ void fix_tile_borders(int xpos, int ypos, int recurse) {
   }
 
   if (type == OBJONLY || type == BERETONLY || type == CHOICEONLY || 
-      (type >= SPIKEU && type <= SPIKEL) || (type >= MOVERU && type <= MOVERL)) {
+      (type >= SPIKEU && type <= SPIKEL) || (type >= MOVERU && type <= MOVERL) || type == DARKNESSTILE) {
     tiles[xpos][ypos][2] = BLANK;
     return;
   }
@@ -2063,7 +2063,7 @@ void create_tiles(int type) {
       case OBJONLY : tiles[i][j][1] = OBJONLYF; break;
       case BERETONLY : tiles[i][j][1] = BERETONLYF; break;
       case MOVERU : case MOVERR : case MOVERD : case MOVERL :
-      case CHOICEONLY : tiles[i][j][1] = NOTSOLIDF; break;
+      case CHOICEONLY : case DARKNESSTILE: tiles[i][j][1] = NOTSOLIDF; break;
       default : tiles[i][j][1] = SOLID;
       }
       if (see_through(type)) tiles[i][j][1] = SOLIDF;
@@ -3361,7 +3361,7 @@ int check_vision(int x1, int y1, int x2, int y2, int *r_tilecx, int *r_tilecy) {
     int tt=tilecy*SPR_SIZE, tb=(tilecy+1)*SPR_SIZE;
     int tl=tilecx*SPR_SIZE, tr=(tilecx+1)*SPR_SIZE;
     
-    if (tiles[tilecx][tilecy][0] && (tiles[tilecx][tilecy][1] == SOLID &&
+    if (tiles[tilecx][tilecy][0] && ((tiles[tilecx][tilecy][1] == SOLID || tiles[tilecx][tilecy][0] == DARKNESSTILE) &&
 				     !(tiles[tilecx][tilecy][0] >= SPIKEU && tiles[tilecx][tilecy][0] <= SPIKEL))) {
       *r_tilecx = tilecx;
       *r_tilecy = tilecy;

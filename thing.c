@@ -207,7 +207,8 @@ void tile_collision(Thing* this, Thing things[250],
 	 this->type == MATTERLY || this->type == ANTIFECTLING) &&
 	thistile != EMPTY && thistile != ANTITILE &&
         !(thistile >= OBJONLY && thistile <= CHOICEONLY) &&
-        !(thistile >= MOVERU && thistile <= MOVERL)) {
+        !(thistile >= MOVERU && thistile <= MOVERL) &&
+        !(thistile == DARKNESSTILE)) {
       tiles[xpos][ypos][0] = EMPTY;
       tiles[xpos][ypos][1] = NOTSOLIDB;
       fix_tile_borders(xpos,ypos,1);
