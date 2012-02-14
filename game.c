@@ -24,7 +24,7 @@
 #define SPR_SIZE 30
 #define CAMSENSE 60
 #define LVLMAX 500
-#define THINGMAX 400
+#define THINGMAX 250
 #define BOSSMAX 10
 #define PARTICLEMAX 2500
 #define ROOMMAX 100

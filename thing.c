@@ -7,7 +7,7 @@
 #include "game.h"
 
 #define LVLMAX 500
-#define THINGMAX 400
+#define THINGMAX 250
 #define BOSSMAX 10
 #define PARTICLEMAX 2500
 
