@@ -3601,7 +3601,7 @@ void draw_get_input() {
             display_message(SCR_WIDTH/2,SCR_HEIGHT/2-msgback->h/2+24+20*i,medfont,msgstr,1);
           }
         }
-        fclose(file);
+        fclose(msgfile);
       }
     }
     display_message(SCR_WIDTH/2,SCR_HEIGHT/2+msgback->h/2-14,smfont,"PRESS ENTER TO CONTINUE",1);
