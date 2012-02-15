@@ -1,4 +1,4 @@
-CC= gcc -I/usr/include/SDL
+CC= gcc
 CFLAGS= -Wall -g
 LFLAGS= -lSDLmain -lSDL -lSDL_image -lSDL_ttf -lSDL_mixer
 
