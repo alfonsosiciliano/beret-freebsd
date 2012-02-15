@@ -3594,10 +3594,10 @@ void draw_get_input() {
       if(msgfile){
         for (i=0; i<8; i++) {
           fgets(msgstr, sizeof msgstr, msgfile);
-          if(msgstr != NULL && msgstr[strlen(msgstr) - 1] == '\n'){
-            msgstr[strlen(msgstr) - 1] = '\0';
-          }
           if(msgstr != NULL && *msgstr != '\0') {
+            if(msgstr[strlen(msgstr) - 1] == '\n'){
+              msgstr[strlen(msgstr) - 1] = '\0';
+            }
             display_message(SCR_WIDTH/2,SCR_HEIGHT/2-msgback->h/2+24+20*i,medfont,msgstr,1);
           }
         }
