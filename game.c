@@ -3547,7 +3547,7 @@ void draw_inventory() {
   displthing.telething = 0;
 
   for (i=2; i <= TOPHATSHIELD; i++) {
-    if (i == READSIGN || i == STONEY || i == BLOCKSTER || 
+    if (i == READSIGN || i == STONEY || i == BLOCKSTER || i == MATTERLY ||
 	i == TOPHAT || i == SHIELDGEN ||
 	(i >= TYPEMAX && i <= SPIKEBLOCK) || i == TOPHATSHIELD) continue;
     displthing.type = i;
