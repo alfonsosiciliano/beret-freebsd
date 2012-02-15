@@ -1190,7 +1190,7 @@ void destroy_thing(Thing* this, int method,
       if (temp == GRYELLOW) play_sound(SND_BOOM+2);
       else if (temp == RED) play_sound(SND_BOOM+1);
       else play_sound(SND_BOOM);
-      if (method == TOUCH)
+      if (method == TOUCH || (method == INFECT && this->type == FAKEBOMB))
         make_expl(cx,cy,vx,vy,temp,4,115);
       else if ((temp = find_empty(things)) > -1)
         make_thing(temp, BOMBHELPER, 
