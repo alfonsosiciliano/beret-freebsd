@@ -2268,6 +2268,21 @@ void special_thing(Thing* this, Thing things[250],
 void check_crash(Thing* this, Thing* other, int oindex, float vel,
                  int crashtype, Thing things[250], int *gravdir,
                  int *switchflags, int thisindex, int playsound) {
+
+  // Let infection take priority over crashing.
+  if (other != NULL && other->type == INFECTLING) {
+  if ((this->type != INFECTLING ||
+       this->subtype != 1) && this->type != ANTIFECTLING &&
+      (other->subtype == 1 || this->animate || other->type == ANTIFECTLING) &&
+      other->timer == 0 && !this->dead && this->solid &&
+      !(this->type == TOPHAT && bossvars[0] < SHIELDGENNUM) &&
+      !(this->type == FIREBALL) &&
+      !(other->type == ANTIFECTLING && this->type != ANTIMATTER &&
+	this->type != MATTERLY && this->type != ANTISEEKER)) {
+    return;
+  }
+  }
+
   if (!(*switchflags & CREATORFLAG)) {
     if (this->crashspeed > -1 && vel > this->crashspeed) {
       destroy_thing(this, crashtype, things, thisindex);
