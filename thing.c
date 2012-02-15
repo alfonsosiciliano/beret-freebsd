@@ -926,7 +926,8 @@ void destroy_thing(Thing* this, int method,
 
     // Sound effects for deaths.
     if (on_screen(this->x, this->y, this->width, this->height) &&
-	!(this->type == BOMB || this->type == STICKYBOMB || this->type == FAKEBOMB || this->type == FIREBALL)) {
+	(method == INFECT || 
+	 !(this->type == BOMB || this->type == STICKYBOMB || this->type == FAKEBOMB || this->type == FIREBALL))) {
       if ((this->type == GHOST && method != PIT && method != INFECT) ||
 	  method == TOUCH || method == BOMBED || (method >= CRASHU && method <= CRASHL))
 	play_sound(SND_POP+rand_to(3));
@@ -1187,10 +1188,12 @@ void destroy_thing(Thing* this, int method,
       temp = (this->type == BOMB || this->type == FAKEBOMB) ? 
         (this->subtype == 0 ? ORANGE :
          (this->subtype == 1 ? RED : GRYELLOW)) : BLUE;
-      if (temp == GRYELLOW) play_sound(SND_BOOM+2);
-      else if (temp == RED) play_sound(SND_BOOM+1);
-      else play_sound(SND_BOOM);
-      if (method == TOUCH)
+      if (method != INFECT) {
+	if (temp == GRYELLOW) play_sound(SND_BOOM+2);
+	else if (temp == RED) play_sound(SND_BOOM+1);
+	else play_sound(SND_BOOM);
+      }
+      if (method == TOUCH || method == INFECT)
         make_expl(cx,cy,vx,vy,temp,4,115);
       else if ((temp = find_empty(things)) > -1)
         make_thing(temp, BOMBHELPER, 
