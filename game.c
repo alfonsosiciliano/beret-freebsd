@@ -700,6 +700,8 @@ int gravdir, switchflags;
 
 char support_path[250];
 
+char msgline[250];
+
 SDL_Surface* screen = NULL;
 SDL_Surface* background = NULL;
 SDL_Surface* invbackground = NULL;
@@ -722,6 +724,7 @@ char messagestr[200], inputstr[25], getinputstr[50];
 int inputpos, inputlength;
 
 FILE* file;
+FILE* msgfile;
 
 Uint32 selcolor;
 
@@ -2891,8 +2894,8 @@ void handle_key_down(SDLKey key) {
         create_tiles(EMPTY);
       } else if (key == SDLK_e) {
         set_up_input("Doors exit to room:", -1, 4, -1);
-/*       } else if (key == SDLK_m) { */
-/*         set_up_input("Set sign message:", -13, 4, -1); */
+       } else if (key == SDLK_m) { 
+         set_up_input("Set sign message:", -13, 4, -1); 
       } else if (key == SDLK_r) {
 	set_up_input("Really clear the room?",-20,-2,-1);
 	yesno = 0;
@@ -3161,7 +3164,7 @@ void handle_mouse_down(int x, int y, int button) {
       if (xtile > -1 && xtile < 24 && ytile > -1 && ytile < 18) {
         if (ytile < 10) {
           tindex = xtile+ytile*24+2;
-          if ((tindex < TOPHAT && tindex != READSIGN && tindex != STONEY &&
+          if ((tindex < TOPHAT && tindex != STONEY &&
 	      tindex != BLOCKSTER && tindex != MATTERLY) || tindex == MATTERFRAG) {
             crtplacetype = tindex;
             crtplacesubtype = 0;
@@ -3547,7 +3550,7 @@ void draw_inventory() {
   displthing.telething = 0;
 
   for (i=2; i <= TOPHATSHIELD; i++) {
-    if (i == READSIGN || i == STONEY || i == BLOCKSTER || 
+    if (i == STONEY || i == BLOCKSTER || 
 	i == TOPHAT || i == SHIELDGEN ||
 	(i >= TYPEMAX && i <= SPIKEBLOCK) || i == TOPHATSHIELD) continue;
     displthing.type = i;
@@ -3579,8 +3582,27 @@ void draw_inventory() {
 void draw_get_input() {
   if (getinput == 3) { // Show message
     apply_surface(SCR_WIDTH/2-msgback->w/2, SCR_HEIGHT/2-msgback->h/2,msgback,screen);
-    for (i=0; i<8; i++) {
-      display_message(SCR_WIDTH/2,SCR_HEIGHT/2-msgback->h/2+24+20*i,medfont,msgs[msgcode][i],1);
+    if(lvlCode < 80){
+      for (i=0; i<8; i++) {
+        display_message(SCR_WIDTH/2,SCR_HEIGHT/2-msgback->h/2+24+20*i,medfont,msgs[msgcode][i],1);
+      }
+    } else {
+      char filestr[250];
+      char msgstr[250];
+      sprintf(filestr, "%srooms%ssign%d-%d.txt", support_path, DIRSEP, lvlCode, msgcode);
+      msgfile = fopen(filestr, "r");
+      if(msgfile){
+        for (i=0; i<8; i++) {
+          fgets(msgstr, sizeof msgstr, msgfile);
+          if(msgstr != NULL && msgstr[strlen(msgstr) - 1] == '\n'){
+            msgstr[strlen(msgstr) - 1] = '\0';
+          }
+          if(msgstr != NULL && *msgstr != '\0') {
+            display_message(SCR_WIDTH/2,SCR_HEIGHT/2-msgback->h/2+24+20*i,medfont,msgstr,1);
+          }
+        }
+        fclose(file);
+      }
     }
     display_message(SCR_WIDTH/2,SCR_HEIGHT/2+msgback->h/2-14,smfont,"PRESS ENTER TO CONTINUE",1);
   } else if (getinput == 14 || getinput == 13 || getinput == 17) { // Get input to go back to map screen
