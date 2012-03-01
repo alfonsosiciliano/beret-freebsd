@@ -195,7 +195,7 @@ const char* story[STORYLEN] =
    "destroy the entire corporation and defeat the Three Evils",
    "using his remarkable power - a quite daunting task, due to",
    "the high security of the Evil Corporation. Each Department",
-   "is inaccessable to anyone without the proper clearance level,",
+   "is inaccessible to anyone without the proper clearance level,",
    "which is determined by the number of Medallions owned by that",
    "person. Therefore, in order to reach the Three Evils, who",
    "reside in extremely well-protected Departments, Beret will",
