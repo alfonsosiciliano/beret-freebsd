@@ -1619,8 +1619,10 @@ void set_up_input(char* inptstr, int inputtype,
   getinput = inputtype;
   inputlength = ilength;
   inputpos = 0;
-  if (deflt > -1) sprintf(inputstr, "%d%n", deflt, &inputpos);
-  else strcpy(inputstr, "-");
+  if (deflt > -1) {
+    sprintf(inputstr, "%d", deflt);
+    inputpos = strlen(inputstr);
+  } else strcpy(inputstr, "-");
   yesno = 0;
 }
 
