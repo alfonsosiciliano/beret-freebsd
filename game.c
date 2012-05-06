@@ -501,7 +501,7 @@ const char* msgs[MSGMAX][8] =
     "Behind this menacing door awaits the second of the Three",
     "Evils. Stoney is a worthy foe - you have a difficult battle",
     "ahead of you. Once you manage to defeat him, though, you will",
-    "be able to continue on to the East Wing of the Evil Corporation",
+    "be able to continue on to the East Wing of the Evil Corporation.",
     " "},
    {"[ Save States ]"," ",
     "While save states can take a bit of time to get used to, it",
@@ -3873,11 +3873,16 @@ void draw_credits() {
   display_message(SCR_WIDTH - 550 + credit_square(1175,200), 290 + credit_cube(1175,4000), font, "Jonathan Kane", 0);
   display_message(SCR_WIDTH - 300 + credit_square(1250,200), 400 + credit_cube(1250,4000), font, "Tristan Pearson", 0);
   display_message(SCR_WIDTH - 460 + credit_square(1325,200), 250 + credit_cube(1325,4000), font, "Beau Pearson", 0);
+  // Special thanks
+  display_message(340 - credit_square(1450,200), 350 - credit_cube(1450, 4000), font, "Special thanks to:", 0);
+  display_message(380 - credit_square(1525,200), 420 - credit_cube(1525, 4000), font, "Mitchell", 0);
+  display_message(300 - credit_square(1600,200), 400 - credit_cube(1600, 4000), font, "Isocitration", 0);
+  display_message(340 - credit_square(1675,200), 330 - credit_cube(1675, 4000), font, "FrostyFish88", 0);
   // Copyright
-  if (credittime < 1500) {
-    display_message(300, 420 + credit_square(1500,200), font, "Copyright 2011 Nigel Kilmer", 0);
+  if (credittime < 1800) {
+    display_message(300, 420 + credit_square(1800,200), font, "Copyright 2012 Nigel Kilmer", 0);
   } else {
-    display_message(300, 420, font, "Copyright 2011 Nigel Kilmer", 0);
+    display_message(300, 420, font, "Copyright 2012 Nigel Kilmer", 0);
     display_message(400, 470, smfont, "Thanks for playing!", 0);
     display_message(400, 500, smfont, "kiwisauce.com", 0);
   }
