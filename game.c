@@ -3591,16 +3591,24 @@ void draw_get_input() {
     } else {
       char filestr[250];
       char msgstr[250];
+      int msglen;
       sprintf(filestr, "%srooms%ssign%d-%d.txt", support_path, DIRSEP, lvlCode, msgcode);
       msgfile = fopen(filestr, "r");
       if(msgfile){
         for (i=0; i<8; i++) {
-          if(fgets(msgstr, sizeof msgstr, msgfile) != NULL && strlen(msgstr) > 0) {
-            if(msgstr[strlen(msgstr) - 1] == '\n'){
-              msgstr[strlen(msgstr) - 1] = '\0';
+          if(fgets(msgstr, sizeof msgstr, msgfile) != NULL) {
+            msglen = strlen(msgstr);
+            if(msglen > 0 && (msgstr[msglen - 1] == '\r' || msgstr[msglen - 1] == '\n')){
+              msgstr[msglen - 1] = '\0';
+              msglen--;
             }
-            if(strlen(msgstr) > 0)
+            if(msglen > 0 && msgstr[msglen - 1] == '\r'){
+              msgstr[msglen - 1] = '\0';
+              msglen--;
+            }
+            if(msglen > 0){
               display_message(SCR_WIDTH/2,SCR_HEIGHT/2-msgback->h/2+24+20*i,medfont,msgstr,1);
+            }
           }
         }
         fclose(msgfile);
