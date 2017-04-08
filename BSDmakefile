@@ -1,6 +1,6 @@
 # Public Domain - NO WARRANTY
 
-CC = clang
+#CC = clang
 CCFLAGS = `sdl-config --cflags` -Wall -g
 INCLUDEDIR = ./
 LDFLAGS = `sdl-config --libs` -lSDLmain -lSDL_image -lSDL_ttf -lSDL_mixer -lm
