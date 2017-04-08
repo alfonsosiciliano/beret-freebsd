@@ -1,6 +1,6 @@
 #include <stdlib.h>
 #include <math.h>
-#include "SDL.h"
+#include <SDL/SDL.h>
 #include "thing.h"
 #include "tile.h"
 #include "physics.h"

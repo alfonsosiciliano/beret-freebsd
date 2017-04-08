@@ -1,4 +1,4 @@
-#include "SDL.h"
+#include <SDL/SDL.h>
 #include "tile.h"
 #include "thing.h"
 #include "game.h"
