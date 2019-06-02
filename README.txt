@@ -1,3 +1,7 @@
+
+beret-freebsd moved to: https://gitlab.com/alfix/beret-freebsd
+==============================================================
+
 Beret Copyright 2011 Nigel Kilmer
 Website: http://kiwisauce.com/beret
 Email: kiwisauce@kiwisauce.com
